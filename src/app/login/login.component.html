@@ -1,0 +1,31 @@
+<div
+  id="login-wrapper"
+  class="d-flex justify-content-center align-items-center vh-100"
+>
+  <div id="login-tile" class="rounded-lg bg-info h-50 w-25 rounded p-2 shadow-lg">
+    <form
+      [formGroup]="loginForm"
+      class="d-flex h-75 flex-column justify-content-around"
+    >
+      <h2 class="text-white text-center font-weight-bold d-block">Login</h2>
+      <div
+        id="form-items-wrapper"
+        class="d-flex flex-column h-50 justify-content-between p-2"
+      >
+        <input
+          placeholder="username"
+          formControlName="username"
+          type="text"
+          class="d-block form-control"
+        />
+        <input
+          placeholder="password"
+          formControlName="password"
+          type="password"
+          class="d-block form-control"
+        />
+        <button class="d-block form-control" (click)="onSubmit()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
