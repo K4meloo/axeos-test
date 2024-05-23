@@ -21,6 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         authHandler.isLoggedIn()
       ) {
         authHandler.refreshToken();
+        return next(authReq);
       }
       return throwError(err);
     })
