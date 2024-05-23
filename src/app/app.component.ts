@@ -3,6 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SwitchesComponent } from './switches/switches.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     RouterLink,
     HttpClientModule,
+    SwitchesComponent,
   ],
   providers: [HttpClientModule],
   templateUrl: './app.component.html',

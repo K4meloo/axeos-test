@@ -1,0 +1,27 @@
+<div
+  id="control-buttons-wrapper"
+  class="d-flex w-100 justify-content-around p-2 rounded-bottom rounded-lg bg-info shadow-sm sticky-top"
+>
+  <button class="btn btn-light text-info" (click)="backToDashboard()">
+    Back to Dashboard
+  </button>
+  <button class="btn btn-light text-info" (click)="logout()">Logout</button>
+</div>
+<div>
+  <div class="d-block p-3 shadow-sm m-4 rounded" *ngFor="let item of switches">
+    <p>{{ item.name }}</p>
+    <p>switched: {{ item.value }}</p>
+    <p>Can be switched: {{ item.can_toggle }}</p>
+    <button
+      *ngIf="item.can_toggle"
+      [ngClass]="{
+        'btn-danger': item.value,
+        'btn-success': !item.value
+      }"
+      class="btn"
+      (click)="toggleSwitch(item)"
+    >
+      switch
+    </button>
+  </div>
+</div>

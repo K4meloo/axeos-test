@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthHandlerService {
+  refreshToken() {
+    let refresh_token = localStorage.getItem('refresh_token')!;
+    this.apiHandler.refreshToken(refresh_token);
+  }
   constructor(private apiHandler: ApiHandlerService, private router: Router) {}
 
   public login(username: string, password: string) {
@@ -27,7 +31,11 @@ export class AuthHandlerService {
   }
 
   public getToken(): string {
-    return this.isLoggedIn() ? localStorage.getItem('access_token')! : '';
+    let value = '';
+    if (this.isLoggedIn()) {
+      value = localStorage.getItem('access_token')!;
+    }
+    return value;
   }
   public logout() {
     localStorage.removeItem('access_token');

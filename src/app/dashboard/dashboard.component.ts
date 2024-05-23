@@ -3,6 +3,7 @@ import { ApiHandlerService } from '../api-handler.service';
 import { webSocketService } from '../web-socket.service';
 import { AuthHandlerService } from '../auth-handler.service';
 import { CommonModule, NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ export class DashboardComponent {
   constructor(
     private apiHandler: ApiHandlerService,
     private webSocket: webSocketService,
-    private authHandler: AuthHandlerService
+    private authHandler: AuthHandlerService,
+    private router: Router
   ) {
     this.webSocket.getObserver().subscribe((next) => {
       this.data.push(JSON.stringify(next));
@@ -30,5 +32,8 @@ export class DashboardComponent {
   }
   sendPing() {
     this.apiHandler.makeCall();
+  }
+  goToSwitches() {
+    this.router.navigateByUrl('/switches');
   }
 }
