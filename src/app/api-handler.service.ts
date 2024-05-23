@@ -11,6 +11,10 @@ import { UrlSerializer } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiHandlerService {
+  constructor(private httpClient: HttpClient) {}
+
+  apiUrl = env.apiUrl;
+
   toggleSwitch(uuid: string, value: boolean) {
     return this.httpClient.post<SwitchStatus>(
       this.apiUrl + '/apis/pbx/v1/switches/' + uuid,
@@ -19,19 +23,18 @@ export class ApiHandlerService {
       }
     );
   }
-  constructor(private httpClient: HttpClient) {}
-
-  apiUrl = env.apiUrl;
 
   private isLoggedIn() {
     if (localStorage.getItem('access_token')) return true;
     return false;
   }
+
   public getSwitches() {
     return this.httpClient.get<Array<SwitchStatus>>(
       this.apiUrl + '/apis/pbx/v1/switches'
     );
   }
+
   makeCall() {
     this.httpClient
       .post(this.apiUrl + '/apis/pbx/v1/calls', { number: '301' })
@@ -39,6 +42,7 @@ export class ApiHandlerService {
         console.log(data);
       });
   }
+
   refreshToken(refresh_token: string) {
     let headers = new HttpHeaders();
     headers = headers.set('Content-type', 'application/x-www-form-urlencoded');
@@ -55,6 +59,7 @@ export class ApiHandlerService {
       }
     );
   }
+
   authorize(
     username: string,
     password: string

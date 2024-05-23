@@ -13,13 +13,6 @@ import { Router } from '@angular/router';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  data: Array<string> = [];
-  logout() {
-    this.authHandler.logout();
-  }
-  checkCalls() {
-    this.apiHandler.getCalls();
-  }
   constructor(
     private apiHandler: ApiHandlerService,
     private webSocket: webSocketService,
@@ -30,9 +23,20 @@ export class DashboardComponent {
       this.data.push(JSON.stringify(next));
     });
   }
+
+  data: Array<string> = [];
+  logout() {
+    this.authHandler.logout();
+  }
+
+  checkCalls() {
+    this.apiHandler.getCalls();
+  }
+
   sendPing() {
     this.apiHandler.makeCall();
   }
+
   goToSwitches() {
     this.router.navigateByUrl('/switches');
   }

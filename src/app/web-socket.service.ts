@@ -4,14 +4,16 @@ import { Injectable } from '@angular/core';
 import { AuthHandlerService } from './auth-handler.service';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Observable } from 'rxjs';
+import { env } from '../environment/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class webSocketService {
   dataObserver: Observable<string>;
-  url: string = 'wss://fetest.demo.axeos.cloud/apis/pbx/v1/events/ws';
+  url: string = env.apiWSUrl;
   socket!: WebSocketSubject<any>;
+
   constructor(private authHandler: AuthHandlerService) {
     this.dataObserver = new Observable((observer) => {
       this.socket = webSocket(this.url);
@@ -21,6 +23,7 @@ export class webSocketService {
       });
     });
   }
+
   getObserver() {
     return this.dataObserver;
   }

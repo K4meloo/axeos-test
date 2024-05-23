@@ -13,25 +13,30 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
   styleUrl: './switches.component.css',
 })
 export class SwitchesComponent {
-  toggleSwitch(item: SwitchStatus) {
-    this.apiHandler.toggleSwitch(item.uuid, !item.value).subscribe((data) => {
-      item.value = data.value;
-    });
-  }
-  switches: Array<SwitchStatus> = [];
   constructor(
     private router: Router,
     private authHandler: AuthHandlerService,
     private apiHandler: ApiHandlerService
   ) {}
+
+  switches: Array<SwitchStatus> = [];
+
   ngOnInit() {
     this.apiHandler.getSwitches().subscribe((data) => {
       this.switches = data;
     });
   }
+
+  toggleSwitch(item: SwitchStatus) {
+    this.apiHandler.toggleSwitch(item.uuid, !item.value).subscribe((data) => {
+      item.value = data.value;
+    });
+  }
+
   logout() {
     this.authHandler.logout();
   }
+
   backToDashboard() {
     this.router.navigateByUrl('/dashboard');
   }
